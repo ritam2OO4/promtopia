@@ -2,11 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { signIn, signOut, useSession, getProviders, getSession } from "next-auth/react";
 
 function Nav() {
+    const { data: session } = useSession;
     const [providers, setProviders] = useState(null);
-    const isUserLoggedIN = true; // Assuming this value will be dynamic based on authentication state
     const [toggleDropdown, settoggleDropdown] = useState(false)
     useEffect(() => {
         const fetchProviders = async () => {
@@ -18,6 +18,7 @@ function Nav() {
 
     return (
         <nav className="flex-between w-full mb-16 pt-3">
+            {alert(providers)}
             <Link href="/" className="flex gap-2 flex-center">
                 <Image
                     src="/assets/images/logo.svg"
@@ -32,7 +33,7 @@ function Nav() {
             {/* Desktop Navigation */}
             <div className="small_screen"> {/* Hidden on small screens, visible on medium and larger */}
                 {
-                    isUserLoggedIN ? (
+                    session?.user ? (
                         <div className="flex gap-3 md:gap-5">
                             <Link href='/create-prompt' className="black_btn">
                                 Create Post
@@ -69,7 +70,7 @@ function Nav() {
                 }
             </div>
             <div className="sm:hidden flex relative ">
-                {isUserLoggedIN ?
+                {session?.user ?
                     <>
                         <Image
                             src='/assets/images/logo.svg'
