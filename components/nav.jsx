@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders, getSession } from "next-auth/react";
+import { signIn, signOut, useSession, getProviders} from "next-auth/react";
 
 function Nav() {
     const { data: session } = useSession();
@@ -42,7 +42,7 @@ function Nav() {
                             </button>
                             <Link href='/profile'>
                                 <Image
-                                    src='/assets/images/logo.svg'
+                                    src={session?.user.image}
                                     width={37}
                                     height={37}
                                     className="rounded-full"
@@ -73,7 +73,7 @@ function Nav() {
                 {session?.user ?
                     <>
                         <Image
-                            src='/assets/images/logo.svg'
+                            src={session?.user.image}
                             width={37}
                             height={37}
                             className="rounded-full"
