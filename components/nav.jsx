@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders, getSession } from "next-auth/react";
 
 function Nav() {
-    const { data: session } = useSession;
+    const { data: session } = useSession();
     const [providers, setProviders] = useState(null);
     const [toggleDropdown, settoggleDropdown] = useState(false)
     useEffect(() => {
@@ -15,10 +15,9 @@ function Nav() {
         };
         fetchProviders();
     }, []);
-
+    
     return (
         <nav className="flex-between w-full mb-16 pt-3">
-            {alert(providers)}
             <Link href="/" className="flex gap-2 flex-center">
                 <Image
                     src="/assets/images/logo.svg"
@@ -26,7 +25,7 @@ function Nav() {
                     width={30}
                     height={30}
                     className="object-contain"
-                />
+                    />
                 <p className="logo_text">Promtopia</p>
             </Link>
 
@@ -56,11 +55,12 @@ function Nav() {
                             {
                                 providers &&
                                 Object.values(providers).map((provider) => (
+                                    
                                     <button
                                         key={provider.name}
                                         onClick={() => signIn(provider.id)}
                                         className="black_btn"
-                                    >
+                                        >
                                         Sign in with {provider.name}
                                     </button>
                                 ))
