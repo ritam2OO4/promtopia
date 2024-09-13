@@ -3,9 +3,8 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Form from '@/components/form'
-import form from '@/components/form'
 
-function createPrompt() {
+function createPromptPage() {
   const router = useRouter();
   const { data: session } = useSession();
   const [submitting, setSubmitting] = useState(false)
@@ -44,4 +43,4 @@ function createPrompt() {
   )
 }
 
-export default createPrompt
+export default createPromptPage
