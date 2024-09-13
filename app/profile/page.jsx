@@ -1,6 +1,7 @@
-import React from 'react'
+'use client'
 import Profile from '@/components/profile'
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 function myProfile() {
     const { data: session } = useSession();
 
@@ -9,7 +10,7 @@ function myProfile() {
     useEffect(() => {
         const fetchPosts = async ()=>{
          const response = await fetch(`api/users/${session?.user.id}/posts`)
-            const data = response.json();
+            const data = await response.json();
             setMyPosts(data)
         }
       if(session?.user.id){
@@ -27,7 +28,7 @@ function myProfile() {
     return (
         <div>
             <Profile
-                name={my}
+                name={'my'}
                 desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
                 data={myPosts}
                 handleEdit={handleEdit}
