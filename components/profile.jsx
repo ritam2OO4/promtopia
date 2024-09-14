@@ -7,7 +7,6 @@ function profile({ name, desc, data, handleEdit, handleDelete }) {
 </span></h1>
 <p className="desc text-left">{desc}</p>
 <div className='mt-10 prompt_layout'>
-{console.log(data)}
       {data.map((post) => (
         <PromptCard
           key={post._id}
